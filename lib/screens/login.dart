@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_movie/providers/common.dart';
+import 'package:provider/provider.dart';
 
-class LogInPage extends StatefulWidget {
-  const LogInPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<LogInPage> createState() => _LogInPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LogInPageState extends State<LogInPage> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _phoneCtrl = TextEditingController();
-  final _passwordCtrl = TextEditingController();
+  final _passCtrl = TextEditingController();
 
   void _onSubmit() {
     if (_formKey.currentState!.validate()) {
-      print("successful");
+      Provider.of<CommonProvider>(context, listen: false).onLogin();
     }
   }
 
@@ -31,11 +33,12 @@ class _LogInPageState extends State<LogInPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Let's sign you in",
+                  "Let's sign you in.",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 34,
-                      fontWeight: FontWeight.bold),
+                    color: Colors.white,
+                    fontSize: 34,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const Text(
                   "Welcome back.",
@@ -53,60 +56,69 @@ class _LogInPageState extends State<LogInPage> {
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "cannot be empty";
-                    }
-                    return null;
-                  },
                   controller: _phoneCtrl,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                      labelStyle:
-                          TextStyle(color: Colors.white.withOpacity(0.2)),
-                      label: const Text("phone number"),
-                      border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.white.withOpacity(0.9)),
-                          borderRadius: BorderRadius.circular(8))),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return "cannot be empty";
+                      return "Хоосон байж болохгүй";
                     }
                     return null;
                   },
-                  controller: _passwordCtrl,
-                  style: const TextStyle(color: Colors.white),
-                  obscureText: true,
                   decoration: InputDecoration(
-                      labelStyle:
-                          TextStyle(color: Colors.white.withOpacity(0.2)),
-                      label: const Text("password"),
-                      border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.white.withOpacity(0.9)),
-                          borderRadius: BorderRadius.circular(8))),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.white.withOpacity(0.6),
+                        width: 1,
+                      ),
+                    ),
+                    labelStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                    label: const Text("Утасны дугаар"),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _passCtrl,
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Хоосон байж болохгүй";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Colors.white.withOpacity(0.6),
+                        width: 1,
+                      ),
+                    ),
+                    labelStyle: TextStyle(
+                      color: Colors.white.withOpacity(0.6),
+                    ),
+                    label: const Text("Нууц үг"),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
             SizedBox(
-              height: 50,
               width: double.infinity,
+              height: 50,
               child: ElevatedButton(
-                onPressed: _onSubmit,
-                child: Text("Sign in"),
                 style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Colors.white),
-                  foregroundColor: WidgetStateProperty.all(Colors.black),
-                  fixedSize: WidgetStateProperty.all(
-                    const Size(double.infinity, 50),
-                  ),
+                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  foregroundColor: MaterialStateProperty.all(Colors.black),
                 ),
+                onPressed: _onSubmit,
+                child: const Text("Нэвтрэх"),
               ),
             ),
           ],

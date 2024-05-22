@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/model/movie/index.dart';
+import 'package:flutter_movie/providers/common.dart';
 import 'package:flutter_movie/widgets/movie_card.dart';
 import 'package:flutter_movie/widgets/movie_special_card.dart';
+import 'package:provider/provider.dart';
 
 class MoviesPage extends StatefulWidget {
   const MoviesPage({super.key});
@@ -16,7 +18,9 @@ class _MoviesPageState extends State<MoviesPage> {
   Future<List<MovieModel>> _getData() async {
     String res =
         await DefaultAssetBundle.of(context).loadString("assets/movies.json");
-    return MovieModel.fromList(jsonDecode(res));
+    List<MovieModel> data = MovieModel.fromList(jsonDecode(res));
+    Provider.of<CommonProvider>(context, listen: false).setMovies(data);
+    return data;
   }
 
   @override
@@ -25,7 +29,7 @@ class _MoviesPageState extends State<MoviesPage> {
       future: _getData(),
       builder: ((context, snapshot) {
         if (snapshot.hasData) {
-          final specialData = snapshot.data!.length > 3
+          final _specialData = snapshot.data!.length > 3
               ? snapshot.data!.sublist(0, 3)
               : snapshot.data!;
           return SingleChildScrollView(
@@ -50,8 +54,8 @@ class _MoviesPageState extends State<MoviesPage> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: List.generate(
-                      specialData.length,
-                      ((index) => MovieSpecialCard(specialData[index])),
+                      _specialData.length,
+                      ((index) => MovieSpecialCard(_specialData[index])),
                     ),
                   ),
                 ),
