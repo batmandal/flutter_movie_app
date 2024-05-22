@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_movie/global_keys.dart';
 import 'package:flutter_movie/model/movie/index.dart';
 import 'package:flutter_movie/providers/common.dart';
 import 'package:flutter_movie/widgets/movie_card.dart';
@@ -19,7 +21,9 @@ class _MoviesPageState extends State<MoviesPage> {
     String res =
         await DefaultAssetBundle.of(context).loadString("assets/movies.json");
     List<MovieModel> data = MovieModel.fromList(jsonDecode(res));
-    Provider.of<CommonProvider>(context, listen: false).setMovies(data);
+    Provider.of<CommonProvider>(GlobalKeys.navigatorKey.currentContext!,
+            listen: false)
+        .setMovies(data);
     return data;
   }
 
@@ -29,7 +33,7 @@ class _MoviesPageState extends State<MoviesPage> {
       future: _getData(),
       builder: ((context, snapshot) {
         if (snapshot.hasData) {
-          final _specialData = snapshot.data!.length > 3
+          final specialData = snapshot.data!.length > 3
               ? snapshot.data!.sublist(0, 3)
               : snapshot.data!;
           return SingleChildScrollView(
@@ -37,11 +41,11 @@ class _MoviesPageState extends State<MoviesPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
                   child: Text(
-                    "Шилдэг",
-                    style: TextStyle(
+                    "top".tr(),
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -54,17 +58,17 @@ class _MoviesPageState extends State<MoviesPage> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: List.generate(
-                      _specialData.length,
-                      ((index) => MovieSpecialCard(_specialData[index])),
+                      specialData.length,
+                      ((index) => MovieSpecialCard(specialData[index])),
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
                   child: Text(
-                    "Бүх кинонууд",
-                    style: TextStyle(
+                    "all".tr(),
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
                       color: Colors.white,

@@ -73,7 +73,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  "${widget.data.publishedYear} | ${Utils.InterMinToString(widget.data.durationMin)} | ${widget.data.type}",
+                                  "${widget.data.publishedYear} | ${Utils.interMinToString(widget.data.durationMin)} | ${widget.data.type}",
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: Color.fromARGB(255, 225, 225, 225),

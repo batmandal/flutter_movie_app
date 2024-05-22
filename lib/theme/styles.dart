@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+
+final ThemeData myTheme = ThemeData(
+  primarySwatch: const MaterialColor(4281743678, {
+    50: Color(0xfff1f2f3),
+    100: Color(0xffe4e5e7),
+    200: Color(0xffc8cbd0),
+    300: Color(0xffadb1b8),
+    400: Color(0xff9297a0),
+    500: Color(0xff777d88),
+    600: Color(0xff5f646d),
+    700: Color(0xff474b52),
+    800: Color(0xff2f3237),
+    900: Color(0xff18191b)
+  }),
+  brightness: Brightness.light,
+  primaryColor: const Color(0xff36393e),
+  primaryColorLight: const Color(0xffe4e5e7),
+  primaryColorDark: const Color(0xff474b52),
+  canvasColor: const Color(0xfffafafa),
+  scaffoldBackgroundColor: const Color(0xfffafafa),
+  cardColor: const Color(0xffffffff),
+  dividerColor: const Color(0x1f000000),
+  highlightColor: const Color(0x66bcbcbc),
+  splashColor: const Color(0x66c8c8c8),
+  unselectedWidgetColor: const Color(0x8a000000),
+  disabledColor: const Color(0x61000000),
+  secondaryHeaderColor: const Color(0xfff1f2f3),
+  dialogBackgroundColor: const Color(0xffffffff),
+  indicatorColor: const Color(0xff777d88),
+  hintColor: const Color(0x8a000000),
+  buttonTheme: const ButtonThemeData(
+    textTheme: ButtonTextTheme.normal,
+    minWidth: 88,
+    height: 36,
+    padding: EdgeInsets.only(top: 0, bottom: 0, left: 16, right: 16),
+    shape: RoundedRectangleBorder(
+      side: BorderSide(
+        color: Color(0xff000000),
+        width: 0,
+        style: BorderStyle.none,
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(2.0)),
+    ),
+    alignedDropdown: false,
+    buttonColor: Color(0xffe0e0e0),
+    disabledColor: Color(0x61000000),
+    highlightColor: Color(0x29000000),
+    splashColor: Color(0x1f000000),
+    focusColor: Color(0x1f000000),
+    hoverColor: Color(0x0a000000),
+  ),
+);

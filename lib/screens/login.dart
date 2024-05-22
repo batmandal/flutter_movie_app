@@ -112,8 +112,8 @@ class LoginPage extends StatelessWidget {
               height: 50,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  foregroundColor: MaterialStateProperty.all(Colors.black),
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  foregroundColor: WidgetStateProperty.all(Colors.black),
                 ),
                 onPressed: _onSubmit,
                 child: const Text("Нэвтрэх"),
