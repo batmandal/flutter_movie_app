@@ -4,22 +4,25 @@ part 'index.g.dart';
 
 @JsonSerializable()
 class MovieModel {
-  String id;
-  String imgUrl;
+  int id;
+  String title, imgUrl;
   int? publishedYear, durationMin;
   String? type, description;
 
-  MovieModel(
-      {required this.id,
-      required this.imgUrl,
-      this.description,
-      this.durationMin,
-      this.publishedYear,
-      this.type});
+  MovieModel({
+    required this.id,
+    required this.imgUrl,
+    required this.title,
+    this.description,
+    this.durationMin,
+    this.publishedYear,
+    this.type,
+  });
+
+  static List<MovieModel> fromList(List<dynamic> data) =>
+      data.map((e) => MovieModel.fromJson(e)).toList();
 
   factory MovieModel.fromJson(Map<String, dynamic> json) =>
       _$MovieModelFromJson(json);
-
-  /// Connect the generated [_$MovieModelToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$MovieModelToJson(this);
 }
