@@ -16,7 +16,7 @@ class ProfilePage extends StatelessWidget {
                 child: const Text("Гарах"),
               ),
             )
-          : const LoginPage();
+          : LoginPage();
     }));
   }
 }
