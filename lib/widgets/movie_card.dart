@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_movie/model/movie/index.dart';
 import 'package:flutter_movie/screens/movie_detail.dart';
+import 'package:flutter_movie/widgets/movie_dialog.dart';
 
 class MovieCard extends StatelessWidget {
   final MovieModel data;
@@ -8,8 +9,12 @@ class MovieCard extends StatelessWidget {
   const MovieCard(this.data, {super.key});
 
   void _onCardTap(BuildContext context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => MovieDetailPage(data)));
+    // showDialog(context: context, builder: (context) => MovieDialog(data));
+    showBottomSheet(context: context, builder: (context) => MovieDialog(data));
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (_) => MovieDetailPage(data)),
+    // );
   }
 
   @override

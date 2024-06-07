@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_movie/global_keys.dart';
 import 'package:flutter_movie/providers/common.dart';
 import 'package:flutter_movie/screens/login.dart';
+import 'package:flutter_movie/services/api/index.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -17,6 +18,12 @@ class ProfilePage extends StatelessWidget {
     }
   }
 
+  void _onHttpRequest() async {
+    final api = ApiService();
+    final data = await api.getRequest("packages/dio");
+    print(data);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CommonProvider>(builder: ((context, provider, child) {
@@ -25,6 +32,9 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  ElevatedButton(
+                      onPressed: _onHttpRequest,
+                      child: const Text("send request")),
                   ElevatedButton(
                     onPressed: _onChangeLanguage,
                     child: Text(context.locale.languageCode),
